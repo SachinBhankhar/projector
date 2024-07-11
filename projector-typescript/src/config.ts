@@ -22,6 +22,9 @@ function getPwd(opts: Opts): string {
 }
 
 function getConfig(opts: Opts): string {
+    if (opts.config) {
+        return opts.config;
+    }
     const home = process.env["HOME"];
     const loc = process.env["XDG_CONFIG_HOME"] || home;
     if (!loc) {

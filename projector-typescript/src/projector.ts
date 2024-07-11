@@ -1,4 +1,4 @@
-import { Config } from "./config"
+import config, { Config } from "./config"
 import * as fs from "fs"
 import * as path from "path"
 
@@ -16,9 +16,19 @@ const defaultConfig = {
     projector: {}
 }
 
-class Projector {
+export default class Projector {
 
     constructor(private config: Config, private data: Data) {
+    }
+
+    save() {
+        const configPath = path.dirname(this.config.config);
+
+        if (!fs.existsSync(configPath)) {
+            fs.mkdirSync(configPath, { recursive: true });
+        }
+
+        fs.writeFileSync(this.config.config, JSON.stringify(this.data));
     }
 
     getValueAll(): { [key: string]: string } {
@@ -39,7 +49,7 @@ class Projector {
                 Object.assign(acc, value);
             }
             return acc;
-        }, {});
+        }, out);
 
         return out;
     }
