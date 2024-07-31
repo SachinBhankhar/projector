@@ -108,8 +108,6 @@ mod test {
 
     use collection_macros::hashmap;
 
-    use crate::config::{Config, Operation};
-
     use super::{Data, Projector};
 
     fn get_data() -> HashMap<PathBuf, HashMap<String, String>> {
